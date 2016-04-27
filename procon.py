@@ -12,7 +12,8 @@ def generateOptTransitions(m, LEN, CYC):
     # CYC = number of previous states to exclude when generating each random walk
 
     X = set(range(m)) # state set
-    qVisited = deque([]) # queue containing last CYC states visited in the current random walk
+    visitedStates = [] # list containing the states visited on the current random walk
+    CYCstates = deque([]) # queue containing last CYC states visited in the current random walk
     edges = [] # list of tuples representing the edges in the generated transition graph
 
     
