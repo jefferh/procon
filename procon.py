@@ -11,14 +11,32 @@ def generateOptTransitions(m, LEN, CYC):
     # LEN = length of each random walk
     # CYC = number of previous states to exclude when generating each random walk
 
-    X = set(range(m)) # state set
-    visitedStates = [] # list containing the states visited on the current random walk
+    X = range(m) # list of all the states
+    visitedStates = set([]) # set containing the states visited on the current random walk
     CYCstates = deque([]) # queue containing last CYC states visited in the current random walk
-    edges = [] # list of tuples representing the edges in the generated transition graph
+    edgeSet = set([]) # set of tuples representing the edges in the generated transition graph
 
-    
-    
-
-def finalizeOptTransitions(edges, NZ, SDT, JUMP, CUT, F, BETA):
+    # Generate initial random walk of length LEN
+    x0 = random.choice(X) # initial state
+    print x0
+    visitedStates.add(x0)
+    CYCstates.append(x0)
+    for t in range(LEN):
+        if t < LEN-1:
+            x1 = random.choice(list(set(X) - set(CYCstates)))
+        else:
+            x1 = random.choice(list(visitedStates - set(CYCstates)))
+        print x1
+        visitedStates.add(x1)
+        CYCstates.append(x1)
+        if len(CYCstates) > CYC:
+            CYCstates.popleft()
+        edgeSet.add((x0,x1))
+        x0 = x1
+    return edgeSet
+        
+def finalizeOptTransitions(edgeList, NZ, SDT, JUMP, CUT, F, BETA):
+    return 
 
 def addNonoptActions(edges, MA, SDA, DEL, MOVE, PERT):
+    return
