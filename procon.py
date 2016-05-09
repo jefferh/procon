@@ -66,9 +66,13 @@ def generateOptTransitions(m, LEN, CYC):
         edgeSet.add((x0,x1))
     print edgeSet
     print visitedStates
-    return edgeSet
+    # return edgeSet
     
     # Assign weights to the edges
+    edgeWeightSet = {}
+    for edge in edgeSet:
+        edgeWeightSet[edge] = np.random.uniform()
+    print edgeWeightSet
 
     # Normalize the weights to get transition probabilities
         
