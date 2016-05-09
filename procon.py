@@ -17,6 +17,9 @@ def generateOptTransitions(m, LEN, CYC):
     edgeSet = set([]) # set of tuples representing the edges in the generated transition graph
 
     # Generate initial random walk of length LEN
+    print "--------------------"
+    print "Initial random walk:"
+    print "--------------------"
     x0 = random.choice(X) # initial state
     print x0
     visitedStates.add(x0)
@@ -33,7 +36,41 @@ def generateOptTransitions(m, LEN, CYC):
             CYCstates.popleft()
         edgeSet.add((x0,x1))
         x0 = x1
+    print "--------------------"
+    print "Initial edge set:"
+    print "--------------------"
+    print edgeSet
+    print "--------------------"
+    print "Initial set of visited states:"
+    print "--------------------"
+    print visitedStates
+    print "--------------------"
+
+    # Connect the isolated states to the generated random walk
+    CYCstates = deque([]) # re-initialize CYCstates
+    while len(set(X) - visitedStates): # while there's a state that hasn't been visited
+        x0 = random.choice(list(set(X) - visitedStates))
+        print x0
+        visitedStates.add(x0)
+        CYCstates.append(x0)
+        x1 = random.choice(list(set(X) - set(CYCstates)))
+        print x1
+        while not x1 in visitedStates:
+            visitedStates.add(x1)
+            CYCstates.append(x1)
+            if len(CYCstates) > CYC:
+                CYCstates.popleft()
+            edgeSet.add((x0,x1))
+            x0 = x1            
+            x1 = random.choice(list(set(X) - set(CYCstates)))
+        edgeSet.add((x0,x1))
+    print edgeSet
+    print visitedStates
     return edgeSet
+    
+    # Assign weights to the edges
+
+    # Normalize the weights to get transition probabilities
         
 def finalizeOptTransitions(edgeList, NZ, SDT, JUMP, CUT, F, BETA):
     return 
