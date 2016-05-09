@@ -75,6 +75,7 @@ def generateOptTransitions(m, LEN, CYC):
     print edgeWeightSet
 
     # Normalize the weights to get transition probabilities
+    
         
 def finalizeOptTransitions(edgeList, NZ, SDT, JUMP, CUT, F, BETA):
     return 
