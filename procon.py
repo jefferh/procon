@@ -1,3 +1,4 @@
+from __future__ import division
 import time
 import random
 import numpy as np
@@ -79,6 +80,12 @@ def generateOptTransitions(m, LEN, CYC):
     eWgrouped = [] # the i-th element will be a dict containing the edges incident to vertex i
     for i in range(m): 
       eWgrouped.append({k:edgeWeightSet[k] for k in edgeWeightSet.keys() if k[0]==i})
+    # return eWgrouped
+    eWnormed = []
+    for i in range(len(eWgrouped)):
+        vertexSum = sum(eWgrouped[i].values())
+        for key in eWgrouped[i]:
+            eWnormed.append(eWgrouped[i][key]/vertexSum)
     return eWnormed
         
 def finalizeOptTransitions(edgeList, NZ, SDT, JUMP, CUT, F, BETA):
