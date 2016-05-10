@@ -73,9 +73,13 @@ def generateOptTransitions(m, LEN, CYC):
     for edge in edgeSet:
         edgeWeightSet[edge] = np.random.uniform()
     print edgeWeightSet
+    # return edgeWeightSet
 
     # Normalize the weights to get transition probabilities
-    
+    eWgrouped = [] # the i-th element will be a dict containing the edges incident to vertex i
+    for i in range(m): 
+      eWgrouped.append({k:edgeWeightSet[k] for k in edgeWeightSet.keys() if k[0]==i})
+    return eWnormed
         
 def finalizeOptTransitions(edgeList, NZ, SDT, JUMP, CUT, F, BETA):
     return 
